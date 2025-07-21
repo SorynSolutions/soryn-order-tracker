@@ -97,7 +97,7 @@ class LoginSystem {
         localStorage.removeItem('sorynLoginTime');
         
         // Redirect to login page
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     }
 
     redirectToMain() {
@@ -138,5 +138,5 @@ window.logout = function() {
     localStorage.removeItem('sorynLoggedIn');
     localStorage.removeItem('sorynUsername');
     localStorage.removeItem('sorynLoginTime');
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }; 
