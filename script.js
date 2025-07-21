@@ -326,6 +326,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Add logout function to global scope
 window.logout = function() {
+    console.log('Logout function called from script.js');
+    
     // Clear all authentication data
     localStorage.removeItem('sorynLoggedIn');
     localStorage.removeItem('sorynUsername');
@@ -350,6 +352,7 @@ window.logout = function() {
     
     // Redirect to login page after brief delay
     setTimeout(() => {
+        console.log('Redirecting to index.html');
         window.location.href = 'index.html';
     }, 1000);
 };

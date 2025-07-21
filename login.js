@@ -133,10 +133,4 @@ document.addEventListener('DOMContentLoaded', () => {
     new LoginSystem();
 });
 
-// Add logout function to global scope for use in main app
-window.logout = function() {
-    localStorage.removeItem('sorynLoggedIn');
-    localStorage.removeItem('sorynUsername');
-    localStorage.removeItem('sorynLoginTime');
-    window.location.href = 'index.html';
-}; 
+// Note: Logout function is defined in script.js for the main app 
