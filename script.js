@@ -1,19 +1,17 @@
 // Order Tracker Application
 class OrderTracker {
     constructor() {
-        // Small delay to ensure login data is properly saved
-        setTimeout(() => {
-            this.checkAuthentication();
-            this.orders = this.loadOrders();
-            this.init();
-        }, 100);
+        this.checkAuthentication();
+        this.orders = this.loadOrders();
+        this.init();
     }
 
     checkAuthentication() {
         const isLoggedIn = localStorage.getItem('sorynLoggedIn');
         const loginTime = localStorage.getItem('sorynLoginTime');
         
-        if (!isLoggedIn || !loginTime) {
+        // Only redirect if we're not already on the login page
+        if ((!isLoggedIn || !loginTime) && window.location.pathname !== '/login.html') {
             window.location.href = 'login.html';
             return;
         }
@@ -27,7 +25,9 @@ class OrderTracker {
             localStorage.removeItem('sorynLoggedIn');
             localStorage.removeItem('sorynUsername');
             localStorage.removeItem('sorynLoginTime');
-            window.location.href = 'login.html';
+            if (window.location.pathname !== '/login.html') {
+                window.location.href = 'login.html';
+            }
             return;
         }
     }

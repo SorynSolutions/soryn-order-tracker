@@ -87,10 +87,8 @@ class LoginSystem {
         // Show success message briefly
         this.showSuccess('Login successful! Redirecting...');
 
-        // Redirect to main application
-        setTimeout(() => {
-            this.redirectToMain();
-        }, 1000);
+        // Redirect to main application immediately
+        this.redirectToMain();
     }
 
     logout() {
