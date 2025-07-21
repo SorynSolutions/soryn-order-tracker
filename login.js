@@ -79,15 +79,23 @@ class LoginSystem {
 
     login(username) {
         // Store login status
+        const loginTime = Date.now().toString();
         localStorage.setItem('sorynLoggedIn', 'true');
         localStorage.setItem('sorynUsername', username);
-        localStorage.setItem('sorynLoginTime', Date.now().toString());
+        localStorage.setItem('sorynLoginTime', loginTime);
+
+        console.log('Login data saved:', {
+            sorynLoggedIn: localStorage.getItem('sorynLoggedIn'),
+            sorynUsername: localStorage.getItem('sorynUsername'),
+            sorynLoginTime: localStorage.getItem('sorynLoginTime')
+        });
 
         // Show success message briefly
         this.showSuccess('Login successful! Redirecting...');
 
         // Redirect to main application
         setTimeout(() => {
+            console.log('Redirecting to main app...');
             this.redirectToMain();
         }, 1000);
     }

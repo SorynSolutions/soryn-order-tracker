@@ -9,8 +9,12 @@ class OrderTracker {
     checkAuthentication() {
         const isLoggedIn = localStorage.getItem('sorynLoggedIn');
         const loginTime = localStorage.getItem('sorynLoginTime');
+        const username = localStorage.getItem('sorynUsername');
+        
+        console.log('Auth Check:', { isLoggedIn, loginTime, username });
         
         if (!isLoggedIn || !loginTime) {
+            console.log('No login data found, redirecting to login');
             window.location.href = 'login.html';
             return;
         }
@@ -19,14 +23,19 @@ class OrderTracker {
         const loginTimestamp = parseInt(loginTime);
         const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
         
+        console.log('Session check:', { currentTime, loginTimestamp, sessionDuration, timeDiff: currentTime - loginTimestamp });
+        
         if (currentTime - loginTimestamp >= sessionDuration) {
             // Session expired
+            console.log('Session expired, clearing data and redirecting');
             localStorage.removeItem('sorynLoggedIn');
             localStorage.removeItem('sorynUsername');
             localStorage.removeItem('sorynLoginTime');
             window.location.href = 'login.html';
             return;
         }
+        
+        console.log('Authentication successful');
     }
 
     init() {
