@@ -321,9 +321,44 @@ document.addEventListener('DOMContentLoaded', () => {
     window.orderTracker = new OrderTracker();
 });
 
+// Add logout function to global scope
+window.logout = function() {
+    // Clear all authentication data
+    localStorage.removeItem('sorynLoggedIn');
+    localStorage.removeItem('sorynUsername');
+    localStorage.removeItem('sorynLoginTime');
+    
+    // Show logout message
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #ff0000;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5);
+        z-index: 1000;
+        animation: slideIn 0.3s ease;
+    `;
+    notification.textContent = 'Logging out...';
+    document.body.appendChild(notification);
+    
+    // Redirect to login page after brief delay
+    setTimeout(() => {
+        window.location.href = 'login.html';
+    }, 1000);
+};
+
 // Add slideOut animation
 const slideOutStyle = document.createElement('style');
 slideOutStyle.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    
     @keyframes slideOut {
         from { transform: translateX(0); opacity: 1; }
         to { transform: translateX(100%); opacity: 0; }
