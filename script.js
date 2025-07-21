@@ -350,7 +350,7 @@ window.logout = function() {
     
     // Redirect to login page after brief delay
     setTimeout(() => {
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     }, 1000);
 };
 
