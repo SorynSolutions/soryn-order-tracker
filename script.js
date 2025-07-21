@@ -1,8 +1,32 @@
 // Order Tracker Application
 class OrderTracker {
     constructor() {
+        this.checkAuthentication();
         this.orders = this.loadOrders();
         this.init();
+    }
+
+    checkAuthentication() {
+        const isLoggedIn = localStorage.getItem('sorynLoggedIn');
+        const loginTime = localStorage.getItem('sorynLoginTime');
+        
+        if (!isLoggedIn || !loginTime) {
+            window.location.href = 'login.html';
+            return;
+        }
+        
+        const currentTime = Date.now();
+        const loginTimestamp = parseInt(loginTime);
+        const sessionDuration = 24 * 60 * 60 * 1000; // 24 hours
+        
+        if (currentTime - loginTimestamp >= sessionDuration) {
+            // Session expired
+            localStorage.removeItem('sorynLoggedIn');
+            localStorage.removeItem('sorynUsername');
+            localStorage.removeItem('sorynLoginTime');
+            window.location.href = 'login.html';
+            return;
+        }
     }
 
     init() {
